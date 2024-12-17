@@ -1,7 +1,7 @@
-import {IsArray, IsEnum, IsISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MinLength, ValidateNested} from "class-validator";
+import {IsArray, IsEnum, IsInt, IsISO8601, IsJSON, IsNotEmpty, IsOptional, IsString, IsUrl, Matches, MaxLength, MinLength, ValidateNested} from "class-validator";
 import {PostStatus} from "../enums/post-status.enum";
 import {PostType} from "../enums/post-type.enum";
-import {CreatePostMetaOptionsDto} from "./create-post-meta-options.dto";
+import {CreatePostMetaOptionsDto} from "../../meta-options/dtos/create-post-meta-options.dto";
 import {Type} from "class-transformer";
 import {ApiProperty, ApiPropertyOptional} from "@nestjs/swagger";
 
@@ -12,6 +12,7 @@ export class CreatePostDto {
     })
     @IsString()
     @MinLength(4)
+    @MaxLength(512)
     @IsNotEmpty()
     title: string;
 
@@ -29,6 +30,7 @@ export class CreatePostDto {
     })
     @IsString()
     @MinLength(4)
+    @MaxLength(256)
     @IsNotEmpty()
     @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {message: "Slug must be lowercase and can only contain alphanumeric characters and hyphens"})
     slug: string;
@@ -63,6 +65,7 @@ export class CreatePostDto {
     })
     @IsUrl()
     @IsOptional()
+    @MaxLength(1024)
     featuredImageUrl?: string;
 
     @ApiPropertyOptional({
@@ -83,22 +86,19 @@ export class CreatePostDto {
     @MinLength(3, {each: true})
     tags?: string[];
 
-    @ApiPropertyOptional({
-        type: "array",
-        required: false,
-        items: {
-            type: "object",
-            properties: {
-                key: {type: "string"},
-                value: {type: "any"},
-            },
-        },
-        description: "Post meta options",
-        example: '[{"key": "sidebarEnabled", "value": true}]',
-    })
-    @IsArray()
+    @ApiPropertyOptional()
     @IsOptional()
     @ValidateNested({each: true})
     @Type(() => CreatePostMetaOptionsDto)
-    metaOptions?: CreatePostMetaOptionsDto[];
+    metaOptions?: CreatePostMetaOptionsDto | null;
+
+    @ApiProperty({
+        type: "integer",
+        required: true,
+        description: "The ID of the author",
+        example: 1,
+    })
+    @IsNotEmpty()
+    @IsInt()
+    authorId: number;
 }

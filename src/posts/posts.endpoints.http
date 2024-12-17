@@ -1,22 +1,27 @@
 ### Get all users
-GET http://localhost:3000/posts/1234
+GET http://localhost:3000/posts
 
 ### Create a post
 POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-    "title": "My First Post",
-    "slug": "my-first-post",
-    "postType": "post",
-    "status": "draft",
-    "slug": "new-with-nestjs",
-    "content": "This is the content of my first post",
-    "schema": "{\"key\": \"value\"}",
-    "featuredImageUrl": "https://example.com/image.jpg",
-    "publishOn": "2024-01-01T00:00:00.000Z",
-    "tags": ["nestjs", "typescript"],
-    "metaOptions": [{"key": "sidebarEnabled", "value": true}]
+  "title": "My First Post",
+  "slug": "my-first-post",
+  "postType": "post",
+  "status": "draft",
+  "content": "This is the content of my first post",
+  "schema": "{\"key\": \"value\"}",
+  "featuredImageUrl": "https://example.com/image.jpg",
+  "publishOn": "2024-01-01T00:00:00.000Z",
+  "tags": [
+    "nestjs",
+    "typescript"
+  ],
+  "metaOptions": {
+    "metaValue": "{\"key\": \"value\"}"
+  },
+  "authorId": 1
 }
 
 ### Update a post
@@ -24,6 +29,9 @@ PATCH http://localhost:3000/posts
 Content-Type: application/json
 
 {
-    "id": 1234,
-    "title": "My First Post"
+  "id": 1234,
+  "title": "My First Post"
 }
+
+### Delete a post
+DELETE http://localhost:3000/posts/18
