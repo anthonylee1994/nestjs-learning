@@ -2,6 +2,9 @@ import {forwardRef, Inject, Injectable} from "@nestjs/common";
 import {GetUsersParamDto} from "../dtos/get-users-param.dto";
 import {AuthService} from "src/auth/providers/auth.service";
 
+/**
+ * Class that provides methods to interact with the users table
+ */
 @Injectable()
 export class UsersService {
     constructor(
