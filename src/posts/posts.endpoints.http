@@ -28,7 +28,7 @@ PATCH http://localhost:3000/posts
 Content-Type: application/json
 
 {
-  "id": 24,
+  "id": 26,
   "title": "My AAA Post",
   "postType": "post",
   "status": "draft",
@@ -42,4 +42,4 @@ Content-Type: application/json
 }
 
 ### Delete a post
-DELETE http://localhost:3000/posts/24
+DELETE http://localhost:3000/posts/25

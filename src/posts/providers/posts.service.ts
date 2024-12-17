@@ -50,7 +50,6 @@ export class PostsService {
     }
 
     public async delete(id: number): Promise<void> {
-        const post = await this.postsRepository.findOne({where: {id}});
-        await this.postsRepository.remove(post);
+        await this.postsRepository.delete(id);
     }
 }
