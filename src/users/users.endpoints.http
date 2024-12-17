@@ -1,0 +1,20 @@
+### Get all users
+GET http://localhost:3000/users/123?limit=10&page=1
+
+### Create a user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "Password123!",
+}
+
+### Patch a user
+PATCH http://localhost:3000/users
+Content-Type: application/json
+{
+  "firstName": "John"
+}
