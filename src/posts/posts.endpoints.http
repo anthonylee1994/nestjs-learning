@@ -14,15 +14,13 @@ Content-Type: application/json
   "schema": "{\"key\": \"value\"}",
   "featuredImageUrl": "https://example.com/image.jpg",
   "publishOn": "2024-01-01T00:00:00.000Z",
-  "tags": [
-    "nestjs",
-    "typescript"
-  ],
   "metaOptions": {
     "metaValue": "{\"key\": \"value\"}"
   },
   "authorId": 3,
-  "tags": [4]
+  "tags": [
+    4
+  ]
 }
 
 ### Update a post
@@ -30,9 +28,18 @@ PATCH http://localhost:3000/posts
 Content-Type: application/json
 
 {
-  "id": 1234,
-  "title": "My First Post"
+  "id": 24,
+  "title": "My AAA Post",
+  "postType": "post",
+  "status": "draft",
+  "content": "test content",
+  "metaOptions": {
+    "metaValue": "{\"aaa\": \"bbb\"}"
+  },
+  "tags": [
+    5
+  ]
 }
 
 ### Delete a post
-DELETE http://localhost:3000/posts/18
+DELETE http://localhost:3000/posts/24
