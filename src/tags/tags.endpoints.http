@@ -1,0 +1,8 @@
+POST http://localhost:3000/tags
+Content-Type: application/json
+
+{
+  "name": "javascript",
+  "slug": "javascript",
+  "description": "JavaScript is a programming language that is used to create interactive and dynamic web pages."
+}

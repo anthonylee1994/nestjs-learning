@@ -1,8 +1,9 @@
 import {PostType} from "./enums/post-type.enum";
 import {PostStatus} from "./enums/post-status.enum";
-import {Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {MetaOption} from "../meta-options/meta-option.entity";
 import {User} from "../users/user.entity";
+import {Tag} from "src/tags/tag.entity";
 
 @Entity()
 export class Post {
@@ -77,5 +78,9 @@ export class Post {
     })
     author: User;
 
-    tags?: string[];
+    @ManyToMany(() => Tag, tag => tag.posts, {
+        eager: true,
+        cascade: true,
+    })
+    tags?: Tag[];
 }

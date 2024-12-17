@@ -78,13 +78,12 @@ export class CreatePostDto {
 
     @ApiPropertyOptional({
         description: "Post tags",
-        example: ["nestjs", "typescript"],
+        example: [1, 2],
     })
     @IsArray()
     @IsOptional()
-    @IsString({each: true})
-    @MinLength(3, {each: true})
-    tags?: string[];
+    @IsInt({each: true})
+    tags?: number[];
 
     @ApiPropertyOptional()
     @IsOptional()

@@ -21,7 +21,8 @@ Content-Type: application/json
   "metaOptions": {
     "metaValue": "{\"key\": \"value\"}"
   },
-  "authorId": 1
+  "authorId": 3,
+  "tags": [4]
 }
 
 ### Update a post
