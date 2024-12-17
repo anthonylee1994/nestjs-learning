@@ -16,6 +16,10 @@ export class TagsService {
         return this.tagRepository.save(tag);
     }
 
+    public async delete(id: number): Promise<void> {
+        await this.tagRepository.delete(id);
+    }
+
     public async findMultipleTags(ids: number[]): Promise<Tag[]> {
         return this.tagRepository.find({where: {id: In(ids)}});
     }

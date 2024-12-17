@@ -1,8 +1,12 @@
+### Create a tag
 POST http://localhost:3000/tags
 Content-Type: application/json
 
 {
-  "name": "ruby",
-  "slug": "ruby",
-  "description": "Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write."
+  "name": "scala",
+  "slug": "scala",
+  "description": "Scala programming language"
 }
+
+### Delete a tag
+DELETE http://localhost:3000/tags/7
