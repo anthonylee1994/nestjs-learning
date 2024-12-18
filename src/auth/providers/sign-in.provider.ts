@@ -18,7 +18,7 @@ export class SignInProvider {
     ) {}
 
     public async signIn(signInDto: SignInDto) {
-        let user = await this.usersService.findOneByEmail(signInDto.email);
+        const user = await this.usersService.findOneByEmail(signInDto.email);
         let isEqual = false;
 
         try {
