@@ -1,7 +1,16 @@
+### Sign In
 POST http://localhost:3000/auth/sign-in
 Content-Type: application/json
 
 {
   "email": "john.doe@example.com",
   "password": "Password123!"
+}
+
+### Refresh Token
+POST http://localhost:3000/auth/refresh-tokens
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE0LCJpYXQiOjE3MzQ1MDUzMTEsImV4cCI6MTczNDU5MTcxMSwiYXVkIjoibG9jYWxob3N0OjMwMDAiLCJpc3MiOiJsb2NhbGhvc3Q6MzAwMCJ9.SuemQeSXKGq-TNup7_fgBmzDdmBckF61mBm_WrAUIBs"
 }

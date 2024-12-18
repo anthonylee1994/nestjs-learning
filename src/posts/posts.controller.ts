@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query} from "@nestjs/common";
+import {Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseInterceptors} from "@nestjs/common";
 import {PostsService} from "./providers/posts.service";
 import {CreatePostDto} from "./dtos/create-post.dto";
 import {ApiOperation, ApiResponse} from "@nestjs/swagger";
@@ -22,6 +22,7 @@ export class PostsController {
         description: "Post created successfully",
     })
     @Post()
+    @UseInterceptors(ClassSerializerInterceptor)
     public create(@Body() createPostDto: CreatePostDto, @ActiveUser() user: ActiveUserData) {
         return this.postsService.create(createPostDto, user);
     }

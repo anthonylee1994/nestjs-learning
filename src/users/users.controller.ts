@@ -1,4 +1,4 @@
-import {Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards} from "@nestjs/common";
+import {Body, ClassSerializerInterceptor, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards, UseInterceptors} from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {GetUsersParamDto} from "./dtos/get-users-param.dto";
 import {PatchUserDto} from "./dtos/patch-user.dto";
@@ -43,6 +43,7 @@ export class UsersController {
 
     @Post()
     @Auth(AuthType.None)
+    @UseInterceptors(ClassSerializerInterceptor)
     public signUp(@Body() createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
     }
