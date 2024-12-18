@@ -12,6 +12,28 @@ Content-Type: application/json
   "password": "Password123!"
 }
 
+### Create many users
+POST http://localhost:3000/users/create-many
+Content-Type: application/json
+
+{
+  "users": [
+    {
+      "firstName": "Mark",
+      "lastName": "Doe",
+      "email": "mark.doe@example.com",
+      "password": "Password123!"
+    },
+    {
+      "firstName": "Anthony",
+      "lastName": "Lee",
+      "email": "anthony.lee@example.com",
+      "password": "Password123!"
+    }
+  ]
+}
+
+
 ### Patch a user
 PATCH http://localhost:3000/users
 Content-Type: application/json

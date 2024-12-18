@@ -36,7 +36,7 @@ Content-Type: application/json
   "metaOptions": {
     "metaValue": "{\"aaa\": \"bbb\"}"
   },
-  "tags": [
+  "tagIds": [
     5
   ]
 }

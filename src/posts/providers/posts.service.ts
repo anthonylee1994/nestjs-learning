@@ -1,4 +1,4 @@
-import {Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable, RequestTimeoutException} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Post} from "../post.entity";
 import {Repository} from "typeorm";
@@ -6,6 +6,7 @@ import {CreatePostDto} from "../dtos/create-post.dto";
 import {UsersService} from "../../users/providers/users.service";
 import {TagsService} from "src/tags/providers/tags.service";
 import {PatchPostDto} from "../dtos/patch-post-dto";
+import {Tag} from "../../tags/tag.entity";
 
 @Injectable()
 export class PostsService {
@@ -33,8 +34,28 @@ export class PostsService {
     }
 
     public async update(patchPostDto: PatchPostDto): Promise<Post> {
-        const tags = await this.tagsService.findMultipleTags(patchPostDto.tagIds);
-        const post = await this.postsRepository.findOne({where: {id: patchPostDto.id}});
+        let tags: Tag[] = undefined;
+        let post: Post = undefined;
+
+        try {
+            tags = await this.tagsService.findMultipleTags(patchPostDto.tagIds);
+        } catch (e) {
+            throw new RequestTimeoutException();
+        }
+
+        if (!tags || tags.length !== patchPostDto.tagIds.length) {
+            throw new BadRequestException("One or more tags not found");
+        }
+
+        try {
+            post = await this.postsRepository.findOne({where: {id: patchPostDto.id}});
+        } catch (e) {
+            throw new RequestTimeoutException();
+        }
+
+        if (!post) {
+            throw new BadRequestException("Post not found");
+        }
 
         post.title = patchPostDto.title ?? post.title;
         post.content = patchPostDto.content ?? post.content;
@@ -46,7 +67,11 @@ export class PostsService {
 
         post.tags = tags;
 
-        return await this.postsRepository.save(post);
+        try {
+            return await this.postsRepository.save(post);
+        } catch (e) {
+            throw new RequestTimeoutException();
+        }
     }
 
     public async delete(id: number): Promise<void> {
