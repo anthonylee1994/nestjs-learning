@@ -15,7 +15,7 @@ export class UsersService {
         private userRepository: Repository<User>
     ) {}
 
-    public async createUser(createUserDto: CreateUserDto) {
+    public async create(createUserDto: CreateUserDto) {
         const existingUser = await this.userRepository.findOne({where: {email: createUserDto.email}});
         let newUser = this.userRepository.create(createUserDto);
         newUser = await this.userRepository.save(newUser);

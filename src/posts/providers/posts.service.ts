@@ -22,7 +22,7 @@ export class PostsService {
 
     public async create(createPostDto: CreatePostDto): Promise<Post> {
         const author = await this.usersService.findOneById(createPostDto.authorId);
-        const tags = await this.tagsService.findMultipleTags(createPostDto.tags);
+        const tags = await this.tagsService.findMultipleTags(createPostDto.tagIds);
 
         const post = this.postsRepository.create({
             ...createPostDto,
@@ -32,8 +32,8 @@ export class PostsService {
         return await this.postsRepository.save(post);
     }
 
-    public async update(patchPostDto: PatchPostDto) {
-        const tags = await this.tagsService.findMultipleTags(patchPostDto.tags);
+    public async update(patchPostDto: PatchPostDto): Promise<Post> {
+        const tags = await this.tagsService.findMultipleTags(patchPostDto.tagIds);
         const post = await this.postsRepository.findOne({where: {id: patchPostDto.id}});
 
         post.title = patchPostDto.title ?? post.title;

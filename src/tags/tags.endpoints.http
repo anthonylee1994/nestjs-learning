@@ -1,3 +1,6 @@
+### Get all tags
+GET http://localhost:3000/tags
+
 ### Create a tag
 POST http://localhost:3000/tags
 Content-Type: application/json

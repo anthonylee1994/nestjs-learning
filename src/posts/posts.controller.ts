@@ -9,7 +9,7 @@ export class PostsController {
     constructor(private readonly postsService: PostsService) {}
 
     @Get()
-    public getPosts() {
+    public findAll() {
         return this.postsService.findAll();
     }
 
@@ -19,17 +19,17 @@ export class PostsController {
         description: "Post created successfully",
     })
     @Post()
-    public createPost(@Body() createPostDto: CreatePostDto) {
+    public create(@Body() createPostDto: CreatePostDto) {
         return this.postsService.create(createPostDto);
     }
 
     @Patch()
-    public updatePost(@Body() patchPostDto: PatchPostDto) {
+    public update(@Body() patchPostDto: PatchPostDto) {
         return this.postsService.update(patchPostDto);
     }
 
     @Delete(":id")
-    public deletePost(@Param("id", ParseIntPipe) id: number) {
+    public delete(@Param("id", ParseIntPipe) id: number) {
         return this.postsService.delete(id);
     }
 }

@@ -6,8 +6,8 @@ POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-  "title": "My First Post",
-  "slug": "my-first-post",
+  "title": "My Second Post",
+  "slug": "my-second-post",
   "postType": "post",
   "status": "draft",
   "content": "This is the content of my first post",
@@ -18,8 +18,8 @@ Content-Type: application/json
     "metaValue": "{\"key\": \"value\"}"
   },
   "authorId": 3,
-  "tags": [
-    4
+  "tagIds": [
+    8
   ]
 }
 

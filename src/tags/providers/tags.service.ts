@@ -11,6 +11,14 @@ export class TagsService {
         private readonly tagRepository: Repository<Tag>
     ) {}
 
+    public async findAll(): Promise<Tag[]> {
+        return this.tagRepository.find();
+    }
+
+    public async findMultipleTags(ids: number[]): Promise<Tag[]> {
+        return this.tagRepository.find({where: {id: In(ids)}});
+    }
+
     public async create(createTagDto: CreateTagDto): Promise<Tag> {
         const tag = this.tagRepository.create(createTagDto);
         return this.tagRepository.save(tag);
@@ -18,9 +26,5 @@ export class TagsService {
 
     public async delete(id: number): Promise<void> {
         await this.tagRepository.delete(id);
-    }
-
-    public async findMultipleTags(ids: number[]): Promise<Tag[]> {
-        return this.tagRepository.find({where: {id: In(ids)}});
     }
 }

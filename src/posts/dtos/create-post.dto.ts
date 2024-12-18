@@ -83,7 +83,7 @@ export class CreatePostDto {
     @IsArray()
     @IsOptional()
     @IsInt({each: true})
-    tags?: number[];
+    tagIds?: number[];
 
     @ApiPropertyOptional()
     @IsOptional()
