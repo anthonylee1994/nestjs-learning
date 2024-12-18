@@ -1,16 +1,17 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query} from "@nestjs/common";
 import {PostsService} from "./providers/posts.service";
 import {CreatePostDto} from "./dtos/create-post.dto";
 import {ApiOperation, ApiResponse} from "@nestjs/swagger";
 import {PatchPostDto} from "./dtos/patch-post-dto";
+import {GetPostsDto} from "./dtos/get-posts.dto";
 
 @Controller("posts")
 export class PostsController {
     constructor(private readonly postsService: PostsService) {}
 
     @Get()
-    public findAll() {
-        return this.postsService.findAll();
+    public findAll(@Query() postQuery: GetPostsDto) {
+        return this.postsService.findAll(postQuery);
     }
 
     @ApiOperation({summary: "Create a new blog post"})
