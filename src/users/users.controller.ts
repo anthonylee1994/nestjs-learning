@@ -1,10 +1,13 @@
-import {Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query} from "@nestjs/common";
+import {Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards} from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {GetUsersParamDto} from "./dtos/get-users-param.dto";
 import {PatchUserDto} from "./dtos/patch-user.dto";
 import {UsersService} from "./providers/users.service";
 import {ApiOperation, ApiQuery, ApiResponse} from "@nestjs/swagger";
 import {CreateManyUsersDto} from "./dtos/create-many-users.dto";
+import {AccessTokenGuard} from "../auth/guards/access-token/access-token.guard";
+import {Auth} from "../auth/decorator/auth.decorator";
+import {AuthType} from "../auth/enums/auth-type.enum";
 
 @Controller("users")
 export class UsersController {
@@ -39,10 +42,12 @@ export class UsersController {
     }
 
     @Post()
+    @Auth(AuthType.None)
     public signUp(@Body() createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
     }
 
+    @UseGuards(AccessTokenGuard)
     @Post("create-many")
     public createManyUsers(@Body() createManyUsersDto: CreateManyUsersDto) {
         return this.usersService.createMany(createManyUsersDto);
