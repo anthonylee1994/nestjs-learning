@@ -39,7 +39,7 @@ export class UsersController {
     }
 
     @Post()
-    public createUser(@Body() createUserDto: CreateUserDto) {
+    public signUp(@Body() createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
     }
 
